@@ -1,0 +1,53 @@
+import 'package:alisportspk/view/constents/bottom_page.dart';
+import 'package:alisportspk/view/constents/laptop_app_bar.dart';
+import 'package:alisportspk/widgets/brands_scrolling_list.dart';
+
+import 'package:alisportspk/widgets/limited_time_sale_items.dart';
+import 'package:alisportspk/widgets/mobile_ap_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:responsive_builder/responsive_builder.dart';
+
+class LimitedTimeSale extends StatelessWidget {
+  LimitedTimeSale({super.key});
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            pinned: false,
+            floating: true,
+            flexibleSpace: ResponsiveBuilder(
+              builder: (context, sizingInformation) {
+                if (sizingInformation.deviceScreenType ==
+                    DeviceScreenType.desktop) {
+                  return const LaptopAppBar(
+                      // scaffoldKey: scaffoldKey,
+                      );
+                } else {
+                  return const MobileAppBar();
+                }
+              },
+            ),
+            toolbarHeight: 280.w,
+            backgroundColor: Colors.red,
+          ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    LimitedTimeSaleItems(),
+                    const BrandsScrollingList(),
+                    const BottomPage(),
+                  ],
+                )),
+          )
+        ],
+      ),
+    );
+  }
+}

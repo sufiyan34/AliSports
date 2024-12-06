@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "878134600527",
+    "project_id": "alisports",
+    "storage_bucket": "alisports.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:878134600527:android:7e6a74797d8545cb631b3a",
+        "android_client_info": {
+          "package_name": "com.alisports.pk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjrlLZ65oqEr3Q3yrA2ciaz_tPKUJLxxc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
