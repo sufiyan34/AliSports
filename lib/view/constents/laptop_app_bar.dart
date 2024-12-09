@@ -272,7 +272,6 @@ class _LaptopAppBarState extends State<LaptopAppBar> {
             child: Row(
               children: [
                 Container(
-                    color: Colors.red,
                     margin: EdgeInsets.only(right: 20.w),
                     child: InkWell(
                       onTap: () async {
