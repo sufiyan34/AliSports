@@ -13,7 +13,6 @@ class Category {
 }
 
 class CatagoryAndSubcacagories {
-  // String? mainCategory;
   // List<List<String>>? category;
   // List<List<String>>? subCategory;
   String? mainCategory;

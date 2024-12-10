@@ -1,6 +1,7 @@
 import 'package:alisportspk/test.dart';
 import 'package:alisportspk/view/constents/buy_and_checkout.dart';
 import 'package:alisportspk/view/home_screen.dart';
+import 'package:alisportspk/widgets/Item_being_bought.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -36,10 +37,9 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child:
-          //const BuyAndCheckout(),
+      child: // const BuyAndCheckout(),
           const HomeScreen(),
-      // const Test(),
+      //  const Test(),
     );
   }
 }

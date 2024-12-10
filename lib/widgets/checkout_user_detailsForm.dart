@@ -31,7 +31,10 @@ class _CheckoutUserDetailsformState extends State<CheckoutUserDetailsform> {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.5,
-      padding: EdgeInsets.only(left: 100.w, right: 20.w),
+      padding: EdgeInsets.only(left: 100.w, right: 50.w),
+      decoration: BoxDecoration(
+          border: Border(
+              left: BorderSide(width: 1.3, color: Colors.grey.shade400))),
       child: Form(
           key: _formKey,
           child: Column(
@@ -358,8 +361,79 @@ class _CheckoutUserDetailsformState extends State<CheckoutUserDetailsform> {
                 labelText: "Billing address",
               ),
               SizedBox(
+                height: 15.h,
+              ),
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  width: MediaQuery.sizeOf(context).width,
+                  height: 65.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.r),
+                    color: Colors.blue,
+                  ),
+                  child: Center(
+                      child: Text(
+                    "Complete Order",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        fontSize: 25.sp),
+                  )),
+                ),
+              ),
+              SizedBox(
                 height: 25.h,
-              )
+              ),
+              Divider(
+                color: Colors.grey.shade400,
+                height: MediaQuery.of(context).size.width * 0.5,
+              ),
+              SizedBox(
+                height: 15.h,
+              ),
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "refund policy",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Shipping policy",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Privacy policy",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Terms of service",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Text(
+                      "Contact information",
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 25.h,
+              ),
             ],
           )),
     );

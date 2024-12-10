@@ -1,10 +1,15 @@
 import 'package:alisportspk/datamodels/productInfo.dart';
 import 'package:alisportspk/getx/appcontrollers.dart';
+import 'package:alisportspk/view/constents/filter_popup.dart';
+import 'package:alisportspk/view/constents/laptop_app_bar.dart';
 import 'package:alisportspk/view/constents/sale_items_catogrised_cards.dart';
+import 'package:alisportspk/view/modules/filters/product_type_filter.dart';
 import 'package:alisportspk/view/modules/filters/saleItem_brand_filter.dart';
+import 'package:alisportspk/widgets/mobile_ap_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 // ignore: must_be_immutable
 class CatagorySelectedFromAppbar extends StatefulWidget {
@@ -29,21 +34,15 @@ class _CatagorySelectedFromAppbarState
   int? priceField;
   int? priceFieldHover;
   AppControllers appControllers = Get.put(AppControllers());
-  int? filteroptionIndex;
-  List<String> titles = [
-    'Price',
-    'Brand',
-    'Product Type',
-    'Size',
-    'Avaliability'
-  ];
+
+  List<Productinfo> desiredTypeproducts = [];
   void initState() {
     desiredTypeproducts = Productinfo.productinfo
         .where((product) =>
-            (product.mainCategory == widget.catagory ||
-                product.subCategory == widget.catagory ||
-                product.precizeCategory == widget.catagory) &&
-            (product.mainCategory == widget.selection ||
+            (product.mainCategory == widget.catagory ||product.mainCategory == widget.selection ||
+                
+                product.precizeCategory == widget.catagory)&&
+            (product.subCategory == widget.catagory ||
                 product.subCategory == widget.selection ||
                 product.precizeCategory == widget.selection) &&
             (product.mainCategory == widget.subcatagory ||
@@ -54,71 +53,97 @@ class _CatagorySelectedFromAppbarState
     super.initState();
   }
 
-  List<Productinfo> desiredTypeproducts = [];
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 125.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: MediaQuery.sizeOf(context).width,
-            child: Text(
-              textAlign: TextAlign.start,
-              "Sale",
-              style: TextStyle(fontSize: 60.sp, fontWeight: FontWeight.w300),
-            ),
+    return Scaffold(
+        body: CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          pinned: false,
+          floating: true,
+          flexibleSpace: ResponsiveBuilder(
+            builder: (context, sizingInformation) {
+              if (sizingInformation.deviceScreenType ==
+                  DeviceScreenType.desktop) {
+                return const LaptopAppBar(
+                    // scaffoldKey: scaffoldKey,
+                    );
+              } else {
+                return const MobileAppBar();
+              }
+            },
           ),
-          // DataFilters(
-          //   data: saleitems,
-          //   filterTitle: titles,
-          //   showAnimation: true,
-          //    recent_selected_data_index: (List<int>? index) {
-          //     filterIndex = index;
-          //     // setState(() {
-
-          //     // });
-          //   },
-          //   style: FilterStyle(
-          //     buttonColor: Colors.green,
-          //     buttonColorText: Colors.white,
-          //     filterBorderColor: Colors.grey,
-          //   ),
-          // ),
-
-          Container(
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(top: 100.w, bottom: 12.w),
-            child: Row(
+          toolbarHeight: 280.w,
+          backgroundColor: Colors.red,
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 125.w),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text("Filter:"),
                 SizedBox(
-                  child: MouseRegion(
-                    onEnter: (event) {
-                      setState(() {
-                        appControllers.filterTitleIndex = 1.obs;
-                      });
-                    },
-                    onExit: (event) {
-                      setState(() {
-                        appControllers.filterTitleIndex = 0.obs;
-                      });
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          "Price",
-                          style: TextStyle(
-                              color: appControllers.filterTitleIndex == 1.obs
-                                  ? Colors.black
-                                  : const Color.fromARGB(221, 34, 34, 34)),
-                        ),
-                        PopupMenuButton(
-                          icon: const Icon(Icons.keyboard_arrow_down),
+                  width: MediaQuery.sizeOf(context).width,
+                  child: Text(
+                    textAlign: TextAlign.start,
+                    widget.selection,
+                    style:
+                        TextStyle(fontSize: 60.sp, fontWeight: FontWeight.w300),
+                  ),
+                ),
+                // DataFilters(
+                //   data: saleitems,
+                //   filterTitle: titles,
+                //   showAnimation: true,
+                //    recent_selected_data_index: (List<int>? index) {
+                //     filterIndex = index;
+                //     // setState(() {
+
+                //     // });
+                //   },
+                //   style: FilterStyle(
+                //     buttonColor: Colors.green,
+                //     buttonColorText: Colors.white,
+                //     filterBorderColor: Colors.grey,
+                //   ),
+                // ),
+
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.only(top: 100.w, bottom: 12.w),
+                  child: Row(
+                    children: [
+                      Text("Filter:"),
+                      MouseRegion(
+                        onEnter: (event) {
+                          setState(() {
+                            appControllers.filterTitleIndex = 1.obs;
+                          });
+                        },
+                        onExit: (event) {
+                          setState(() {
+                            appControllers.filterTitleIndex = 0.obs;
+                          });
+                        },
+                        child: PopupMenuButton(
+                          child: Row(
+                            children: [
+                              Text(
+                                "Price",
+                                style: TextStyle(
+                                    color:
+                                        appControllers.filterTitleIndex == 1.obs
+                                            ? Colors.black
+                                            : const Color.fromARGB(
+                                                221, 34, 34, 34)),
+                              ),
+                              const Icon(Icons.keyboard_arrow_down),
+                            ],
+                          ),
                           itemBuilder: (context) {
                             return [
                               PopupMenuItem(
+                                enabled: false,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -129,12 +154,14 @@ class _CatagorySelectedFromAppbarState
                                       child: MouseRegion(
                                         onEnter: (event) {
                                           setState(() {
-                                            filteroptionIndex = 1;
+                                            appControllers.filterTitleIndex =
+                                                1.obs;
                                           });
                                         },
                                         onExit: (event) {
                                           setState(() {
-                                            filteroptionIndex = 0;
+                                            appControllers.filterTitleIndex =
+                                                0.obs;
                                           });
                                         },
                                         child: Text(
@@ -144,10 +171,11 @@ class _CatagorySelectedFromAppbarState
                                                 TextDecoration.underline,
                                             decorationStyle:
                                                 TextDecorationStyle.solid,
-                                            decorationThickness:
-                                                filteroptionIndex! == 1
-                                                    ? 4.0.h
-                                                    : 2.0.h,
+                                            decorationThickness: appControllers
+                                                        .filterTitleIndex ==
+                                                    1.obs
+                                                ? 4.0.h
+                                                : 2.0.h,
                                           ),
                                         ),
                                       ),
@@ -156,6 +184,7 @@ class _CatagorySelectedFromAppbarState
                                 ),
                               ),
                               PopupMenuItem(
+                                enabled: false,
                                 child: Row(
                                   children: [
                                     Row(
@@ -276,54 +305,47 @@ class _CatagorySelectedFromAppbarState
                             ];
                           },
                         ),
-                      ],
-                    ),
+                      ),
+                      SaleitemBrandFilter(),
+                      FilterPopup(
+                        popupOptions: [
+                          widget.selection,
+                        ],
+                        filter_number: 3,
+                        label: 'Product Type',
+                      ),
+                      FilterPopup(
+                        popupOptions: [
+                          "In stock(${desiredTypeproducts.length})",
+                          "Out of stock(${desiredTypeproducts.length})"
+                        ],
+                        filter_number: 4,
+                        label: 'Availability',
+                      ),
+                      
+                      Text("Sorted by:")
+                         FilterPopup(
+                        popupOptions: [
+                          "No Option Avaliable",
+                         
+                        ],
+                        filter_number: 5,
+                        label: 'Featured',
+                      ),
+                      Text("${desiredTypeproducts.length} products")
+
+                    ],
                   ),
                 ),
-                SaleitemBrandFilter(),
-                MouseRegion(
-                    onEnter: (event) {
-                      setState(() {
-                        appControllers.filterTitleIndex = 3.obs;
-                      });
-                    },
-                    onExit: (event) {
-                      setState(() {
-                        appControllers.filterTitleIndex = 0.obs;
-                      });
-                    },
-                    child: InkWell(
-                      onTap: () {
-                        showMenu(
-                          context: context,
-                          position: const RelativeRect.fromLTRB(
-                              100, 100, 100, 100), //(left, top, right, bottom)
-                          items: [
-                            const PopupMenuItem(
-                              value: 1,
-                              child: Icon(Icons.add),
-                              //ProductTypeFilter(),
-                            ),
-                          ],
-                        );
-                      },
-                      child: Text(
-                        "Product Type",
-                        style: TextStyle(
-                            color: appControllers.filterTitleIndex == 3.obs
-                                ? Colors.black
-                                : const Color.fromARGB(221, 34, 34, 34)),
-                      ),
-                    )),
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                SaleItemsCatogrisedCards(
+                  productsList: desiredTypeproducts,
+                ),
               ],
             ),
           ),
-          ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          SaleItemsCatogrisedCards(
-            productsList: desiredTypeproducts,
-          ),
-        ],
-      ),
-    );
+        )
+      ],
+    ));
   }
 }

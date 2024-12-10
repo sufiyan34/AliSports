@@ -65,6 +65,7 @@ class _BuyAndCheckoutState extends State<BuyAndCheckout> {
                 border: Border(
                     top: BorderSide(color: Colors.grey.shade300, width: 0.4))),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [const CheckoutUserDetailsform(), ItemBeingBought()],
             ),
           )

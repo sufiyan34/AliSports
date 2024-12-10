@@ -41,11 +41,6 @@ class _LaptopShopNowScreenState extends State<LaptopShopNowScreen> {
 
   bool clicked = false;
   List<Widget> pagesToNavigate = [
-    // const Placeholder(),
-    //  const Placeholder(),
-    // const Placeholder(),
-    // const Placeholder(),
-    // const Placeholder(),
     LimitedTimeSale(),
     const CricketingEquipmentSale(),
     const BadmintionEquipmentEquipmentSale(),

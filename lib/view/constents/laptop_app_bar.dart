@@ -3,28 +3,17 @@ import 'dart:developer';
 
 import 'package:alisportspk/getx/appcontrollers.dart';
 import 'package:alisportspk/view/constents/searchable_dropdown.dart';
-
-import 'package:alisportspk/view/modules/dropdownlists/accessories_dropdown.dart';
-import 'package:alisportspk/view/modules/dropdownlists/badmintion_dropdown.dart';
-import 'package:alisportspk/view/modules/dropdownlists/cricket_dropdown.dart';
-import 'package:alisportspk/view/modules/dropdownlists/exercise&fittness_dropdown.dart';
-
-import 'package:alisportspk/view/modules/dropdownlists/sportswear_dropdown.dart';
-import 'package:alisportspk/view/modules/dropdownlists/tabletennis_dropdown.dart';
-import 'package:alisportspk/view/modules/dropdownlists/tennis_dropdown.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-//import 'package:get/get.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class LaptopAppBar extends StatefulWidget {
-  //final GlobalKey<ScaffoldState> scaffoldKey;
   const LaptopAppBar({
-    super.key, //required this.scaffoldKey
+    super.key,
   });
 
   @override
@@ -36,7 +25,7 @@ class _LaptopAppBarState extends State<LaptopAppBar> {
     'alisportsbwn@gmail.com|0315-2273142',
     "Minimum order: Rs 1000/-"
   ];
-  // AppControllers _drawerVisible = Get.put(AppControllers());
+
   int? dropdownitemindex;
   int menuIndex = 0;
 
@@ -70,26 +59,7 @@ class _LaptopAppBarState extends State<LaptopAppBar> {
   final Uri youtube = Uri.parse('https://www.youtube.com/');
   final Uri profile = Uri.parse(
       'https://shopify.com/authentication/68619141437/login?client_id=4208b5f1-2a76-4697-9db1-b3d7b03b717f&locale=en&redirect_uri=https%3A%2F%2Fshopify.com%2Fauthentication%2F68619141437%2Foauth%2Fauthorize%3Fclient_id%3D4208b5f1-2a76-4697-9db1-b3d7b03b717f%26locale%3Den%26nonce%3Deaddf651-7804-40f3-985b-2249a1b5bb84%26redirect_uri%3Dhttps%253A%252F%252Fshopify.com%252F68619141437%252Faccount%252Fcallback%253Fsource%253Dcore%26response_type%3Dcode%26scope%3Dopenid%2Bemail%2Bcustomer-account-api%253Afull%26state%3D01JACQAB9SZVXGG99V6VTM2TRK');
-  List<Widget> dropdowns = [
-    const CricketDropdown(),
-    const BadmintionDropdown(),
-    const TennisDropdown(),
-    const TableTennisDropdown(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-    const ExerciseAndFittnessDropdown(),
-    const Placeholder(),
-    const SportswearDropdown(),
-    const AccessoriesDropdown(),
-    const Placeholder(),
-    const Placeholder(),
-  ];
+
   AppControllers appControllers = Get.put(AppControllers());
   ExpansionTileController? expansionTileController = ExpansionTileController();
   int textIndex = 0;
@@ -308,29 +278,11 @@ class _LaptopAppBarState extends State<LaptopAppBar> {
                             onTap: () {
                               appControllers.dropdownPlutoMenusIndex.value =
                                   index;
-                              // appControllers.dropdownPlutoMenusTitle.value = e;
+
                               appControllers.openMenuContainer.toggle();
                               isDropdownSelected = !isDropdownSelected;
                               dropdownitemindex = index;
                               log(' open status : ${appControllers.openMenuContainer.value},pluto index no: ${appControllers.dropdownPlutoMenusIndex.value}');
-
-                              // log("${dropShow.itemsInfo.firstWhere(
-                              //   (element) =>
-                              //       element.mainCategory ==
-                              //       appControllers
-                              //           .dropdownPlutoMenusTitle.value,
-                              //   orElse: () {
-                              //     return CatagoryAndSubcacagories(
-                              //         mainCategory: "Not Found",
-                              //         category: [
-                              //           ["No Category"]
-                              //         ],
-                              //         subCategory: [
-                              //           ["No Subcategory"]
-                              //         ]);
-                              //   },
-                              // )}");
-                              // _hoverIndex = index;
                             },
                             child: Container(
                               width: 180.w,
@@ -499,10 +451,6 @@ class _LaptopAppBarState extends State<LaptopAppBar> {
                     IconButton(
                         onPressed: () {
                           Scaffold.of(context).openEndDrawer();
-                          //  widget.scaffoldKey.currentState!.openEndDrawer();
-                          // _drawerVisible.openDrader.value =
-                          //     !_drawerVisible.openDrader.value;
-                          // _drawerVisible.toggleDrawer;
                         },
                         icon: const Icon(
                           Icons.local_mall_outlined,
@@ -513,9 +461,6 @@ class _LaptopAppBarState extends State<LaptopAppBar> {
               ],
             ),
           ),
-          // SizedBox(
-          //   child: dropdowns[menuIndex],
-          // )
         ],
       ),
     );

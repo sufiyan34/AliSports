@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:alisportspk/getx/appcontrollers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,23 +7,23 @@ import 'package:get/get.dart';
 
 class CustomRadiotilesBloc extends StatefulWidget {
   final List<String> options;
-  String? currentOption;
-  TextStyle? labelStyle;
+   String? currentOption;
+ final TextStyle? labelStyle;
   final RxString
       stringName; // it is the name of he variable that will be in Getx extended class whose value needs to be changed
   final String? labelText;
   double? iconSize;
-  bool radioButtonApplied;
-  List<Widget>? tailing;
-  List<IconData>? tailingIcons;
-  bool toggleColor; // Toggle icons color in trailing
-  TextStyle? titleTextStyle;
-  List<bool>? isExpandable; // Determines if a tile can expand
-  List<Widget>? expandedWidgets; // Widgets shown when tiles expand
-  Color? expandedTileColor; // Color for expanded tile
-  Color? collapsedTileColor; // Color for collapsed tile
-  BorderRadius? borderRadius; // Border radius for tiles
-  Color? expandedContentBackground;
+ final bool radioButtonApplied;
+ final List<Widget>? tailing;
+ final List<IconData>? tailingIcons;
+ final bool toggleColor; // Toggle icons color in trailing
+ final TextStyle? titleTextStyle;
+ final List<bool>? isExpandable; // Determines if a tile can expand
+ final List<Widget>? expandedWidgets; // Widgets shown when tiles expand
+ final Color? expandedTileColor; // Color for expanded tile
+ final Color? collapsedTileColor; // Color for collapsed tile
+ final BorderRadius? borderRadius; // Border radius for tiles
+ final Color? expandedContentBackground;
   CustomRadiotilesBloc({
     super.key,
     this.radioButtonApplied = true,

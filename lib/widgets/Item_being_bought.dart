@@ -1,3 +1,4 @@
+import 'package:alisportspk/app_utills/custom_form_field.dart';
 import 'package:alisportspk/getx/appcontrollers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +11,16 @@ import 'package:google_fonts/google_fonts.dart';
 class ItemBeingBought extends StatelessWidget {
   ItemBeingBought({super.key});
   AppControllers appControllers = Get.put(AppControllers());
-  double shippingPrice = 300.00;
-
+  TextEditingController discountCode = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width * 0.5,
         height: MediaQuery.of(context).size.height,
-        color: Colors.grey[300],
-        padding: EdgeInsets.only(right: 100.w, left: 20.w),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+        ),
+        padding: EdgeInsets.only(right: 120.w, left: 50.w, top: 40.h),
         child: Obx(
           () {
             final chosenProduct = appControllers.choosenProduct.value;
@@ -32,14 +34,16 @@ class ItemBeingBought extends StatelessWidget {
                       children: [
                         badges.Badge(
                           badgeStyle: badges.BadgeStyle(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.w, vertical: 14.h),
-                            badgeColor: Colors.black87,
+                            // padding: EdgeInsets.symmetric(
+                            //     horizontal: 10.w, vertical: 14.h),
+                            badgeColor: Colors.black.withOpacity(0.75),
                           ),
-                          badgeContent: Text(
-                            appControllers.productPurchaseQuantity.toString(),
-                            style: GoogleFonts.notoSerifAhom(
-                                fontSize: 10.sp, color: Colors.white),
+                          badgeContent: Center(
+                            child: Text(
+                              appControllers.productPurchaseQuantity.toString(),
+                              style: TextStyle(
+                                  fontSize: 12.sp, color: Colors.white),
+                            ),
                           ),
                           child: Container(
                             height: 80.w,
@@ -65,25 +69,68 @@ class ItemBeingBought extends StatelessWidget {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          width: 12.w,
+                        ),
                         RichText(
                             textAlign: TextAlign.left,
                             text: TextSpan(
                                 style: TextStyle(
-                                    fontSize: 14.sp, color: Colors.black),
+                                    fontSize: 18.sp, color: Colors.black),
                                 text: "${chosenProduct.title!}\n",
                                 children: [
                                   TextSpan(
                                     text: appControllers.productSize.value,
                                     style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: Colors.black.withOpacity(0.8)),
+                                        fontSize: 16.sp,
+                                        color: Colors.grey[800]),
                                   )
                                 ])),
                       ],
                     ),
-                    Text(appControllers.productDiscountedPrice.toString())
+                    Text(
+                      appControllers.productDiscountedPrice.toString(),
+                      style: TextStyle(fontSize: 18.sp, color: Colors.black),
+                    )
                   ],
                 ),
+                SizedBox(height: 10.h),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 500.w,
+                      child: CustomFormTextField(
+                        fieldController: discountCode,
+                        labelText: "Discount code",
+                        fillColor: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20.w,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        height: 55.h,
+                        width: 80.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(7.r),
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.grey.shade400)),
+                        child: Center(
+                          child: Text(
+                            "Apply",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18.sp,
+                                color: Colors.blueGrey[600]),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10.h),
                 Row(
                   children: [
                     Text(
@@ -95,6 +142,7 @@ class ItemBeingBought extends StatelessWidget {
                     Text(appControllers.productDiscountedPrice.toString()),
                   ],
                 ),
+                SizedBox(height: 10.h),
                 Row(
                   children: [
                     Text(
@@ -112,21 +160,36 @@ class ItemBeingBought extends StatelessWidget {
                           color: Colors.grey.shade800,
                           size: 14.h,
                         )),
-                    Text(shippingPrice.toString()),
+                    Text(appControllers.productShippingPrice.value.toString()),
                   ],
                 ),
+                SizedBox(height: 15.h),
                 Row(
                   children: [
                     Text(
                       "Toal",
                       style: TextStyle(
-                        fontSize: 18.sp,
-                      ),
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
                     ),
                     Text(
-                        "PKR ${appControllers.productDiscountedPrice + shippingPrice}"),
+                      "PKR",
+                      style: TextStyle(
+                          fontSize: 18.sp, color: Colors.grey.shade800),
+                    ),
+                    Text(
+                      " ${appControllers.productDiscountedPrice + 300.00
+                      //appControllers.productShippingPrice.value
+                      }",
+                      style: TextStyle(
+                          fontSize: 20.sp,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ],
-                )
+                ),
+                SizedBox(height: 10.h),
               ],
             );
           },

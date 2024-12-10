@@ -25,6 +25,7 @@ class AppControllers extends GetxController {
   Rx<int> productPurchaseQuantity = 1.obs;
   Rx<double> productDiscountPercentage = 0.00.obs;
   Rx<double> productDiscountedPrice = 0.00.obs;
+  Rx<double> productShippingPrice = 300.0.obs;
   void toggleDrawer() {
     openDrader.toggle();
   }

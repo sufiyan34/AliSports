@@ -13,6 +13,15 @@ class Test extends StatefulWidget {
 
 class _TestState extends State<Test> {
   int selectedIndex = -1;
+  double selected = 0;
+  List<String> popupOptions = [
+    "option 1",
+    "option 2",
+    "option 3",
+    "option 4",
+    "option 5"
+  ];
+  final List<String> selectedOptions = [];
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -369,6 +378,58 @@ class _TestState extends State<Test> {
           ],
         ),
       ),
+      PopupMenuButton(
+        position: PopupMenuPosition.under,
+        menuPadding: EdgeInsets.symmetric(horizontal: 12.w),
+        child: const Row(
+          children: [Text("options"), Icon(Icons.keyboard_arrow_down)],
+        ),
+        onSelected: (value) {
+          setState(() {
+            if (selectedOptions.contains(value)) {
+              selectedOptions.remove(value); // Deselect if already selected
+            } else {
+              selectedOptions.add(value); // Add to selected options
+            }
+          });
+        },
+        itemBuilder: (context) {
+          return [
+            PopupMenuItem(
+                enabled: false,
+                padding: EdgeInsets.symmetric(vertical: 10.h),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("${selected} selected"),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text(
+                        "Reset",
+                        style: TextStyle(decoration: TextDecoration.underline),
+                      ),
+                    )
+                  ],
+                )),
+            ...popupOptions.map((item) => PopupMenuItem(
+                value: item,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 30.h,
+                      width: 30.h,
+                      decoration: BoxDecoration(border: Border.all()),
+                      child: selectedOptions.contains(item)
+                          ? const Center(
+                              child: Icon(Icons.check, color: Colors.black))
+                          : null,
+                    ),
+                    Text(item)
+                  ],
+                )))
+          ];
+        },
+      )
     ]));
   }
 }

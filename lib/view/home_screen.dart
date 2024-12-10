@@ -67,36 +67,6 @@ class _HomeScreenState extends State<HomeScreen> {
             SliverAppBar(
               pinned: false,
               floating: true,
-              //  automaticallyImplyLeading: false,
-              // bottom: PreferredSize(
-              //   preferredSize:
-              //       Size(MediaQuery.of(context).size.width, dynamicHeight),
-              //   child: Obx(
-              //     () {
-              //       return LayoutBuilder(builder: (context, constraints) {
-              //         dynamicHeight = constraints.maxHeight;
-              //         debugPrint(
-              //             ' should open: ${appControllers.openMenuContainer.value}, open index no: ${appControllers.dropdownPlutoMenusIndex.value}');
-              //         return appControllers.dropdownPlutoMenusIndex.value !=
-              //                     null &&
-              //                 appControllers.openMenuContainer.value
-              //             ? Container(
-              //                 color: Colors.white.withOpacity(0.90),
-              //                 height: dynamicHeight,
-              //                 child: appControllers.dropdownPlutoMenus[
-              //                     appControllers
-              //                         .dropdownPlutoMenusIndex.value!],
-              //               )
-              //             : const SizedBox(
-              //                 height: 0,
-              //                 width: 0,
-              //               );
-              //       });
-              //     },
-              //   ),
-
-              // ),
-
               flexibleSpace: ResponsiveBuilder(
                 builder: (context, sizingInformation) {
                   if (sizingInformation.deviceScreenType ==
